@@ -34,10 +34,10 @@
   }
   const dechiffrer = (k, octets) => crypto.subtle.decrypt({ name: 'AES-GCM', iv: octets.slice(0, 12) }, k, octets.slice(12));
 
-  async function telecharger(url, essais = 3) {
+  async function telecharger(url, essais = 3, options = {}) {
     for (let i = 0; ; i++) {
       try {
-        const r = await fetch(url);
+        const r = await fetch(url, options);
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return new Uint8Array(await r.arrayBuffer());
       } catch (err) {
@@ -53,7 +53,7 @@
   /** Ouvre le contenu avec la clé et le mot de passe. Rejette « cle » s'ils ne l'ouvrent pas. */
   async function ouvrir(cle, secret) {
     K = await cleAes(cle, secret);
-    const brut = await telecharger(`d/contenu.bin?t=${Date.now()}`);
+    const brut = await telecharger(`d/contenu.bin?t=${Date.now()}`, 3, { cache: 'no-store' });
     let clair;
     try { clair = await dechiffrer(K, brut); } catch { throw new Error('cle'); }
     paquet = JSON.parse(new TextDecoder().decode(clair));

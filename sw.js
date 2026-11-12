@@ -1,5 +1,5 @@
 // Soonstep Comm, téléphone : l'appli s'ouvre sans réseau ; les visuels déjà vus restent sur le téléphone.
-const VERSION = '1.1.0';
+const VERSION = '1.1.0-c68166d8';
 const COQUILLE = `coquille-${VERSION}`;
 const VISUELS = 'visuels-v1';
 const FICHIERS = [
@@ -24,7 +24,7 @@ self.addEventListener('fetch', (e) => {
 
   // Le contenu (posts, réglages de base) : le réseau d'abord, la dernière copie sinon.
   if (chemin.endsWith('/d/contenu.bin')) {
-    e.respondWith(fetch(e.request).then((r) => {
+    e.respondWith(fetch(new Request(e.request, { cache: 'no-store' })).then((r) => {
       if (r.ok) { const copie = r.clone(); caches.open(VISUELS).then((c) => c.put('d/contenu.bin', copie)); }
       return r;
     }).catch(() => caches.open(VISUELS).then((c) => c.match('d/contenu.bin')).then((r) => r || Response.error())));
@@ -43,8 +43,11 @@ self.addEventListener('fetch', (e) => {
     return;
   }
 
-  // L'interface : le réseau d'abord pour avoir la dernière version, le cache hors ligne.
-  e.respondWith(fetch(e.request).then((r) => {
+  // L'interface : le réseau d'abord (sans le cache HTTP de 10 min de GitHub Pages), le cache hors ligne.
+  const frais = e.request.mode === 'navigate'
+    ? new Request(url.href, { cache: 'no-cache', credentials: 'same-origin' })
+    : new Request(e.request, { cache: 'no-cache' });
+  e.respondWith(fetch(frais).then((r) => {
     if (r.ok) { const copie = r.clone(); caches.open(COQUILLE).then((c) => c.put(e.request, copie)); }
     return r;
   }).catch(() => caches.match(e.request, { ignoreSearch: false }).then((r) => r || caches.match('index.html'))));
