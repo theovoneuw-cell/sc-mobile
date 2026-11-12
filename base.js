@@ -3,6 +3,17 @@
 'use strict';
 
 (() => {
+  // Téléphone tourné à l'horizontale : d'après l'écran lui-même. La fenêtre visible ne suffit pas :
+  // le clavier d'Android la rend plus large que haute, sans que le téléphone ait tourné.
+  const majPaysage = () => {
+    const type = (screen.orientation && screen.orientation.type) || (Math.abs(Number(window.orientation) || 0) === 90 ? 'landscape' : 'portrait');
+    const petitEcran = Math.min(screen.width, screen.height) <= 520;
+    document.documentElement.classList.toggle('paysage-vrai', type.startsWith('landscape') && petitEcran);
+  };
+  majPaysage();
+  if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', majPaysage);
+  window.addEventListener('orientationchange', majPaysage);
+
   const enc = (s) => new TextEncoder().encode(s);
   const SEL = enc('soonstep-comm-mobile');
   const MIMES = { png: 'image/png', jpg: 'image/jpeg', mp4: 'video/mp4', pdf: 'application/pdf' };

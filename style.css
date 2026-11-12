@@ -107,15 +107,15 @@ svg.ic { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor
 .demarrage { position: fixed; inset: 0; display: grid; place-items: center; }
 .demarrage img { width: 44px; opacity: .9; }
 
-/* Le téléphone reste à la verticale : en paysage, on demande de le tourner. */
+/* Le téléphone reste à la verticale : en paysage, on demande de le tourner.
+   La classe vient de l'orientation de l'écran (base.js), pas de la forme de la fenêtre :
+   sur Android, le clavier ouvert rend la fenêtre plus large que haute, et masquait tout. */
 .paysage { display: none; }
-@media (orientation: landscape) and (max-height: 520px) {
-  .paysage {
-    display: flex; position: fixed; inset: 0; z-index: 100; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
-    background: var(--page); text-align: center; font-weight: 700; color: var(--texte-2);
-  }
-  .paysage img { width: 40px; transform: rotate(-90deg); }
+html.paysage-vrai .paysage {
+  display: flex; position: fixed; inset: 0; z-index: 100; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  background: var(--page); text-align: center; font-weight: 700; color: var(--texte-2);
 }
+html.paysage-vrai .paysage img { width: 40px; transform: rotate(-90deg); }
 
 /* ─── Écrans et en-têtes ────────────────────── */
 .ecran {
