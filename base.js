@@ -308,7 +308,21 @@
     }
   }
 
-  window.BASE = { L, ouvrir, blob, url, urlPrete, existe, Noyau, paquet: () => paquet, cle: () => CLE };
+  // Apparence : « systeme » suit le téléphone, « clair » et « sombre » l'imposent.
+  const COULEURS_BARRE = { clair: '#faf7ff', sombre: '#0f172a' };
+  const metasBarre = [...document.querySelectorAll('meta[name="theme-color"]')].map((m) => ({ m, media: m.getAttribute('media'), couleur: m.content }));
+  function appliquerTheme(theme) {
+    const t = theme === 'clair' || theme === 'sombre' ? theme : 'systeme';
+    if (t === 'systeme') delete document.documentElement.dataset.theme;
+    else document.documentElement.dataset.theme = t;
+    for (const { m, media, couleur } of metasBarre) {
+      if (t === 'systeme') { m.setAttribute('media', media); m.content = couleur; } else { m.removeAttribute('media'); m.content = COULEURS_BARRE[t]; }
+    }
+    L.ecrire('theme', t);
+  }
+  appliquerTheme(L.lire('theme', 'systeme'));
+
+  window.BASE = { L, appliquerTheme, ouvrir, blob, url, urlPrete, existe, Noyau, paquet: () => paquet, cle: () => CLE };
 
   // Le manifeste sert à Android (installation, verticale imposée). Sur iPhone, sans lui,
   // « Sur l'écran d'accueil » garde le lien complet, clé comprise.

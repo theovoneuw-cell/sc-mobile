@@ -31,7 +31,7 @@
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="clair"]) {
     --page: #0f172a; --surface: #1b2537; --surface-2: #253046;
     --texte: #f8fafc; --texte-2: #cbd5e1; --texte-3: #94a3b8; --filet: rgba(255, 255, 255, .08);
     --ombre: 0 1px 2px rgba(0, 0, 0, .3);
@@ -46,6 +46,22 @@
     color-scheme: dark;
   }
 }
+/* Sombre choisi dans l’appli, quel que soit le réglage du téléphone. */
+:root[data-theme="sombre"] {
+    --page: #0f172a; --surface: #1b2537; --surface-2: #253046;
+    --texte: #f8fafc; --texte-2: #cbd5e1; --texte-3: #94a3b8; --filet: rgba(255, 255, 255, .08);
+    --ombre: 0 1px 2px rgba(0, 0, 0, .3);
+    --verre: rgba(15, 23, 42, .78); --verre-filet: rgba(255, 255, 255, .08);
+    --chip-bg: rgba(76, 29, 149, .45); --chip-fg: var(--p300);
+    --ok-bg: rgba(22, 101, 52, .45); --ok-fg: #86efac;
+    --att-bg: rgba(154, 52, 18, .45); --att-fg: #fdba74;
+    --err-bg: rgba(153, 27, 27, .45); --err-fg: #fca5a5;
+    --neutre-bg: #334155; --neutre-fg: #cbd5e1;
+    --actif: var(--p400);
+    --presse: rgba(167, 139, 250, .1);
+    color-scheme: dark;
+}
+/* Clair choisi dans l’appli : les règles sombres ci-dessus ne s’appliquent pas (:not([data-theme="clair"])). */
 
 /* ─── Socle téléphone ───────────────────────── */
 * { box-sizing: border-box; margin: 0; }
@@ -298,7 +314,8 @@ button.chip.prendre:active { background: var(--chip-bg); }
   transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
 }
 .segments button[aria-pressed="true"] { background: var(--surface); color: var(--texte); box-shadow: 0 1px 3px rgba(15, 23, 42, .12); font-weight: 700; }
-@media (prefers-color-scheme: dark) { .segments button[aria-pressed="true"] { background: #3b4863; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="clair"]) .segments button[aria-pressed="true"] { background: #3b4863; } }
+:root[data-theme="sombre"] .segments button[aria-pressed="true"] { background: #3b4863; }
 
 /* Filtres en bande défilante. */
 .filtres { display: flex; gap: 8px; overflow-x: auto; padding: 2px 16px 4px; scrollbar-width: none; scroll-padding: 16px; }
@@ -504,11 +521,13 @@ details.repli + details.repli { border-top: .5px solid var(--filet); }
 .toast.alerte { background: #7f1d1d; }
 .toast span { flex: 1; }
 .toast button { color: var(--p300); font-weight: 800; min-height: 32px; }
-@media (prefers-color-scheme: dark) { .toast { background: #f1f0f7; color: #0f172a; } .toast button { color: var(--p700); } .toast.alerte { background: #fecaca; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="clair"]) .toast { background: #f1f0f7; color: #0f172a; } :root:not([data-theme="clair"]) .toast button { color: var(--p700); } :root:not([data-theme="clair"]) .toast.alerte { background: #fecaca; } }
+:root[data-theme="sombre"] .toast { background: #f1f0f7; color: #0f172a; } :root[data-theme="sombre"] .toast button { color: var(--p700); } :root[data-theme="sombre"] .toast.alerte { background: #fecaca; }
 
 /* ─── Agenda (Calendrier › Agenda), même forme que l'agenda téléphone de Ma Compta ─── */
 :root { --ag-post: var(--p600); --ag-mail: #0284c7; --ag-promo: #d97706; --ag-tournage: #db2777; }
-@media (prefers-color-scheme: dark) { :root { --ag-post: var(--p400); --ag-mail: #38bdf8; --ag-promo: #fbbf24; --ag-tournage: #f472b6; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="clair"]) { --ag-post: var(--p400); --ag-mail: #38bdf8; --ag-promo: #fbbf24; --ag-tournage: #f472b6; } }
+:root[data-theme="sombre"] { --ag-post: var(--p400); --ag-mail: #38bdf8; --ag-promo: #fbbf24; --ag-tournage: #f472b6; }
 .ecran .segments button { display: inline-flex; align-items: center; justify-content: center; text-align: center; }
 .ag-nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 20px 10px; }
 .ag-mois { font-size: 22px; font-weight: 800; letter-spacing: -.025em; }
@@ -570,3 +589,7 @@ details.repli + details.repli { border-top: .5px solid var(--filet); }
 .pied-ab { padding: 4px 16px 12px; }
 .gauche-ab { display: flex; align-items: center; gap: 12px; min-width: 0; }
 svg.ic-reseau { width: 22px; height: 22px; color: var(--texte-2); }
+.entree-theme { cursor: default; }
+.entree-theme .segments { flex: none; }
+.entree-theme .segments button { min-height: 32px; padding: 0 10px; font-size: 14px; }
+.entree-theme:active { background: none; }
