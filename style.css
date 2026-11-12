@@ -558,3 +558,13 @@ details.repli + details.repli { border-top: .5px solid var(--filet); }
 .ag-sous { font-size: 14px; color: var(--texte-3); }
 .ag-main .etats { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
 .ag-vide { margin: 0 4px; padding: 18px 16px; border-radius: 16px; border: 1px dashed var(--filet); color: var(--texte-3); font-size: 15px; text-align: center; }
+
+/* ─── Abonnés (accueil) ─── */
+.ligne-abonnes { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 48px; padding: 8px 16px; position: relative; text-align: left; }
+.ligne-abonnes + .ligne-abonnes::before { content: ''; position: absolute; top: 0; left: 16px; right: 0; border-top: .5px solid var(--filet); }
+.ligne-abonnes:active { background: var(--presse); }
+.reseau-ab { font-size: 15px; font-weight: 600; }
+.reseau-ab small { display: block; font-size: 13px; font-weight: 500; color: var(--texte-3); margin-top: 1px; }
+.reseau-ab small.monte { color: var(--ok-fg); }
+.ligne-abonnes b { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+.pied-ab { padding: 4px 16px 12px; }
