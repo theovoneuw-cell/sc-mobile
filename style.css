@@ -505,3 +505,56 @@ details.repli + details.repli { border-top: .5px solid var(--filet); }
 .toast span { flex: 1; }
 .toast button { color: var(--p300); font-weight: 800; min-height: 32px; }
 @media (prefers-color-scheme: dark) { .toast { background: #f1f0f7; color: #0f172a; } .toast button { color: var(--p700); } .toast.alerte { background: #fecaca; } }
+
+/* ─── Agenda (Calendrier › Agenda), même forme que l'agenda téléphone de Ma Compta ─── */
+:root { --ag-post: var(--p600); --ag-mail: #0284c7; --ag-promo: #d97706; --ag-tournage: #db2777; }
+@media (prefers-color-scheme: dark) { :root { --ag-post: var(--p400); --ag-mail: #38bdf8; --ag-promo: #fbbf24; --ag-tournage: #f472b6; } }
+.ecran .segments button { display: inline-flex; align-items: center; justify-content: center; text-align: center; }
+.ag-nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 20px 10px; }
+.ag-mois { font-size: 22px; font-weight: 800; letter-spacing: -.025em; }
+.ag-fleches { display: flex; gap: 6px; }
+.ag-fleche { width: 40px; height: 40px; border: 0; border-radius: 999px; background: var(--surface); box-shadow: var(--ombre); color: var(--texte); display: inline-flex; align-items: center; justify-content: center; font: inherit; }
+.ag-fleche svg.ic { width: 20px; height: 20px; stroke-width: 2.4; }
+.ag-fleche svg.ic.gauche { transform: scaleX(-1); }
+.ag-fleche:disabled { opacity: .3; }
+.ag-fleche:not(:disabled):active { transform: scale(.94); }
+.ag-grille { padding: 6px 6px 8px; }
+.ag-tete, .ag-cases { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.ag-tete span { padding: 6px 0 4px; text-align: center; font-size: 12px; font-weight: 700; color: var(--texte-3); }
+.ag-tete span:nth-child(n+6) { opacity: .7; }
+.ag-case { height: 52px; padding: 4px 0 0; border: 0; background: none; color: inherit; font: inherit; display: flex; flex-direction: column; align-items: center; gap: 3px; -webkit-tap-highlight-color: transparent; }
+.ag-case.hors { pointer-events: none; }
+.ag-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; font-size: 15px; font-weight: 500; color: var(--texte); transition: background-color 120ms ease, color 120ms ease; }
+.ag-case.auj .ag-num { color: var(--actif); font-weight: 800; }
+.ag-case.sel .ag-num { background: var(--texte); color: var(--page); font-weight: 700; }
+.ag-case.auj.sel .ag-num { background: var(--p600); color: #fff; }
+.ag-case:active .ag-num { transform: scale(.92); }
+.ag-points { display: flex; gap: 3px; height: 5px; }
+.ag-points i, .ag-legende i { width: 5px; height: 5px; border-radius: 50%; background: var(--ag-post); }
+.ag-points i.mail, .ag-legende i.mail { background: var(--ag-mail); }
+.ag-points i.promo, .ag-legende i.promo { background: var(--ag-promo); }
+.ag-points i.tournage, .ag-legende i.tournage { background: var(--ag-tournage); }
+.ag-points i.fait { opacity: .3; }
+.ag-points i.retard { box-shadow: 0 0 0 1.5px var(--err-fg); }
+.ag-legende { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 0 6px; font-size: 13px; color: var(--texte-3); }
+.ag-legende span { display: inline-flex; align-items: center; gap: 6px; }
+.ag-legende i { width: 7px; height: 7px; }
+.ag-jour { margin-top: 4px; }
+.ag-jour-tete { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0 4px 10px; }
+.ag-jour-tete h2 { font-size: 18px; font-weight: 750; letter-spacing: -.015em; }
+.ag-jour-tete h2::first-letter { text-transform: uppercase; }
+.ag-liste { display: flex; flex-direction: column; gap: 8px; }
+.ag-item { --evc: var(--ag-post); display: flex; align-items: stretch; gap: 14px; width: 100%; padding: 13px 16px; border: 0; border-radius: 16px; text-align: left; font: inherit; color: inherit; background: var(--surface); box-shadow: inset 3px 0 0 var(--evc), var(--ombre); -webkit-tap-highlight-color: transparent; transition: transform 120ms var(--ease-out); }
+.ag-item.mail { --evc: var(--ag-mail); }
+.ag-item.promo { --evc: var(--ag-promo); }
+.ag-item.tournage { --evc: var(--ag-tournage); }
+.ag-item:active { transform: scale(.985); }
+.ag-item.fait .ag-titre { color: var(--texte-3); }
+.ag-t { flex: 0 0 60px; display: flex; flex-direction: column; }
+.ag-h { font-size: 15px; font-weight: 700; color: var(--texte); white-space: nowrap; }
+.ag-h.petit { font-size: 13px; font-weight: 700; color: var(--evc); white-space: normal; line-height: 1.25; }
+.ag-main { display: flex; flex-direction: column; min-width: 0; gap: 2px; }
+.ag-titre { font-size: 16px; font-weight: 600; color: var(--texte); overflow-wrap: anywhere; }
+.ag-sous { font-size: 14px; color: var(--texte-3); }
+.ag-main .etats { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+.ag-vide { margin: 0 4px; padding: 18px 16px; border-radius: 16px; border: 1px dashed var(--filet); color: var(--texte-3); font-size: 15px; text-align: center; }
