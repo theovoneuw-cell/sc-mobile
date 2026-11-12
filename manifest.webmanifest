@@ -1,0 +1,18 @@
+{
+  "id": "./",
+  "name": "Soonstep Comm",
+  "short_name": "Soonstep",
+  "description": "La communication du lancement Soonstep, sur le téléphone.",
+  "lang": "fr",
+  "scope": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf7ff",
+  "theme_color": "#faf7ff",
+  "icons": [
+    { "src": "img/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "img/icone-masque-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
