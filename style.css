@@ -606,3 +606,22 @@ svg.ic-reseau { width: 22px; height: 22px; color: var(--texte-2); }
 .retouche.faite .retouche-texte { color: var(--texte-3); text-decoration: line-through; text-decoration-color: var(--filet); }
 .retouches-faites { border-top: .5px solid var(--filet); margin-top: 2px; }
 .lien-discret { font-size: 13px; color: var(--texte-3); text-decoration: underline; text-underline-offset: 2px; min-height: 28px; }
+.retouche-ajout { flex-direction: column; align-items: stretch; }
+.retouche-boutons { display: flex; gap: 8px; justify-content: flex-end; }
+.retouche-boutons label.btn { margin-right: auto; }
+.retouche-boutons .btn { min-height: 44px; }
+.retouche-photos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.retouche-ajout .retouche-photos { margin-top: 0; }
+.photo-mini { position: relative; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; background: var(--surface-2); flex: none; }
+.photo-mini > button:first-child { display: block; width: 100%; height: 100%; }
+.photo-mini img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.photo-mini.attente { animation: photo-attente 1.2s ease-in-out infinite alternate; }
+@keyframes photo-attente { from { opacity: .5; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .photo-mini.attente { animation: none; } }
+.photo-retirer { position: absolute; top: 0; right: 0; width: 30px; height: 30px; display: grid; place-items: center; }
+.photo-retirer::before { content: ''; position: absolute; width: 22px; height: 22px; border-radius: 50%; background: rgba(15, 23, 42, .72); }
+.photo-retirer svg.ic { position: relative; width: 12px; height: 12px; color: #fff; stroke-width: 2.6; }
+.photo-grande { position: fixed; inset: 0; z-index: 100; background: rgba(2, 6, 23, .9); display: grid; place-items: center; padding: calc(env(safe-area-inset-top) + 48px) 12px calc(env(safe-area-inset-bottom) + 24px); }
+.photo-grande img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; }
+.photo-fermer { position: absolute; top: calc(env(safe-area-inset-top) + 8px); right: 12px; width: 44px; height: 44px; display: grid; place-items: center; color: #fff; }
+.photo-fermer svg.ic { width: 22px; height: 22px; }
