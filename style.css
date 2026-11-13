@@ -593,3 +593,16 @@ svg.ic-reseau { width: 22px; height: 22px; color: var(--texte-2); }
 .entree-theme .segments { flex: none; }
 .entree-theme .segments button { min-height: 32px; padding: 0 10px; font-size: 14px; }
 .entree-theme:active { background: none; }
+
+/* ─── Retouches (bloc-notes partagé de l'accueil) ─── */
+.retouche-ajout { display: flex; gap: 8px; align-items: flex-end; padding: 8px 16px 6px; }
+.retouche-ajout .btn { min-height: 46px; flex: none; }
+.retouche { display: grid; grid-template-columns: minmax(0, 1fr) 44px; gap: 6px; align-items: start; padding: 8px 4px 8px 16px; position: relative; }
+.retouche + .retouche::before { content: ''; position: absolute; top: 0; left: 16px; right: 0; border-top: .5px solid var(--filet); }
+.retouche .coche { margin-top: -6px; }
+.retouche-texte { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; line-height: 1.4; }
+.retouche-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; margin-top: 3px; font-size: 13px; color: var(--texte-3); }
+.retouche-meta b { color: var(--texte-2); font-weight: 600; }
+.retouche.faite .retouche-texte { color: var(--texte-3); text-decoration: line-through; text-decoration-color: var(--filet); }
+.retouches-faites { border-top: .5px solid var(--filet); margin-top: 2px; }
+.lien-discret { font-size: 13px; color: var(--texte-3); text-decoration: underline; text-underline-offset: 2px; min-height: 28px; }
