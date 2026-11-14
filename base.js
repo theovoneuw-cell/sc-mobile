@@ -313,7 +313,7 @@
     }
     CLE = cle;
     try {
-      for (const nom of ['planning', 'promotion', 'sondage', 'offre', 'abonnes', 'retouches', 'coffre', 'app']) await executer(paquet.scripts[nom], nom);
+      for (const nom of ['planning', 'promotion', 'sondage', 'offre', 'abonnes', 'retouches', 'coffre', 'postprod', 'app']) await executer(paquet.scripts[nom], nom);
     } catch (err) {
       accueil(`<h1>L’appli n’a pas pu démarrer</h1><p>${String(err.message || err)}</p>`);
     }
