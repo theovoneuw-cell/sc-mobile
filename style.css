@@ -665,3 +665,16 @@ label.btn { cursor: pointer; }
 .retouche-post:active { opacity: .5; }
 .retouche-post.absent { color: var(--texte-3); }
 .retouche.faite .retouche-post { opacity: .7; }
+
+/* ─── Couleur des réseaux (agenda, listes) : on reconnaît le réseau avant de lire ─── */
+:root { --r-insta: #e1306c; --r-story: #9333ea; --r-fb: #1877f2; --r-linkedin: #0b3a75; --r-tiktok: #111827; --r-mail: #059669; --ag-mail: var(--r-mail); --ag-tournage: #64748b; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="clair"]) { --r-insta: #f472a0; --r-story: #c084fc; --r-fb: #4b96ff; --r-linkedin: #a9c7ee; --r-tiktok: #e5e7eb; --r-mail: #34d399; --ag-mail: var(--r-mail); --ag-tournage: #f1f5f9; } }
+:root[data-theme="sombre"] { --r-insta: #f472a0; --r-story: #c084fc; --r-fb: #4b96ff; --r-linkedin: #a9c7ee; --r-tiktok: #e5e7eb; --r-mail: #34d399; --ag-mail: var(--r-mail); --ag-tournage: #f1f5f9; }
+.r-insta { --rc: var(--r-insta); } .r-story { --rc: var(--r-story); } .r-fb { --rc: var(--r-fb); }
+.r-linkedin { --rc: var(--r-linkedin); } .r-tiktok { --rc: var(--r-tiktok); } .r-mail { --rc: var(--r-mail); }
+.ag-points i.post[class*=" r-"], .ag-legende i.post[class*=" r-"] { background: var(--rc); }
+.ag-item.post[class*=" r-"] { --evc: var(--rc); }
+.ag-points { gap: 2px; height: 6px; }
+.ag-points i { width: 6px; height: 6px; }
+.nom-reseau[class*=" r-"] { color: var(--texte-2); font-weight: 600; }
+.nom-reseau[class*=" r-"]::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--rc); margin-right: 5px; vertical-align: 1px; }

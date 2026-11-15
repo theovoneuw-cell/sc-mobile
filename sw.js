@@ -1,5 +1,5 @@
 // Soonstep Comm, téléphone : l'appli s'ouvre sans réseau ; les visuels déjà vus restent sur le téléphone.
-const VERSION = '1.9.0-a488d53f';
+const VERSION = '1.10.0-519f2d32';
 const COQUILLE = `coquille-${VERSION}`;
 const VISUELS = 'visuels-v1';
 const FICHIERS = [
