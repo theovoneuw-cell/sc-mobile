@@ -559,7 +559,7 @@ details.repli + details.repli { border-top: .5px solid var(--filet); }
 .ag-points i.mail, .ag-legende i.mail { background: var(--ag-mail); }
 .ag-points i.promo, .ag-legende i.promo { background: var(--ag-promo); }
 .ag-points i.tournage, .ag-legende i.tournage { background: var(--ag-tournage); }
-.ag-points i.fait { opacity: .3; }
+.ag-points i.fait { opacity: .4; }
 .ag-points i.retard { box-shadow: 0 0 0 1.5px var(--err-fg); }
 .ag-legende { display: flex; flex-wrap: wrap; gap: 6px 14px; padding: 0 6px; font-size: 13px; color: var(--texte-3); }
 .ag-legende span { display: inline-flex; align-items: center; gap: 6px; }
@@ -678,3 +678,8 @@ label.btn { cursor: pointer; }
 .ag-points i { width: 6px; height: 6px; }
 .nom-reseau[class*=" r-"] { color: var(--texte-2); font-weight: 600; }
 .nom-reseau[class*=" r-"]::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--rc); margin-right: 5px; vertical-align: 1px; }
+/* États dans l'agenda : à programmer = point creux, programmé = point plein, publié = point pâli. */
+.ag-points i.aprog, .ag-legende i.aprog { background: transparent !important; box-shadow: inset 0 0 0 1.5px var(--rc, var(--ag-post)); }
+.ag-points i.mail.aprog, .ag-legende i.mail.aprog { box-shadow: inset 0 0 0 1.5px var(--ag-mail); }
+.ag-legende i.fait { opacity: .4; }
+.ag-legende-etats { margin-top: -4px; }
