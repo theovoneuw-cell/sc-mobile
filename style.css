@@ -650,3 +650,12 @@ label.btn { cursor: pointer; }
 .pp-cit { color: var(--texte) !important; font-weight: 600; }
 .pp-app { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--chip-fg); margin-top: 4px; }
 .pp-app .ic { width: 13px; height: 13px; }
+
+/* Retouches liées à une publication : lien depuis l'accueil vers le post */
+.retouche-post { display: flex; align-items: center; gap: 0 4px; max-width: 100%; min-height: 32px; margin: -4px 0 0; padding: 0; border: 0; background: none; font: inherit; font-size: 13px; color: var(--actif); text-align: left; -webkit-tap-highlight-color: transparent; }
+.retouche-post .rp-ou { flex: none; white-space: nowrap; }
+.retouche-post b { flex: 0 1 auto; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.retouche-post .ic { width: 14px; height: 14px; flex: none; }
+.retouche-post:active { opacity: .5; }
+.retouche-post.absent { color: var(--texte-3); }
+.retouche.faite .retouche-post { opacity: .7; }
