@@ -205,10 +205,16 @@ html.paysage-vrai .paysage img { width: 40px; transform: rotate(-90deg); }
 .page.entrante, .page.sortante { transform: translateX(100%); }
 .ecran { transition: transform 360ms var(--ease-page); }
 .ecran.recul, .page.recul { transform: translateX(-24%); }
+/* Onglets voisins préchargés, de part et d'autre de l'écran, pour le glissement. */
+#app { overflow: hidden; }
+.ecran.voisin { pointer-events: none; transition: none; }
+.ecran.voisin[data-cote="avant"] { transform: translate3d(-100%, 0, 0); }
+.ecran.voisin[data-cote="apres"] { transform: translate3d(100%, 0, 0); }
 .vignette:not([src]):is(img) { background: var(--surface-2); }
 @media (prefers-reduced-motion: reduce) {
   .page, .ecran, .ecran.recul, .page.recul { transition: opacity 200ms ease; transform: none !important; }
   .page.entrante, .page.sortante { opacity: 0; }
+  .ecran.voisin { visibility: hidden; }
 }
 .page .tete { padding-top: 6px; }
 .page .titre-page { font-size: 24px; font-weight: 800; letter-spacing: -.025em; line-height: 1.15; }
