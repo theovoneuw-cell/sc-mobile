@@ -683,3 +683,7 @@ label.btn { cursor: pointer; }
 .ag-points i.mail.aprog, .ag-legende i.mail.aprog { box-shadow: inset 0 0 0 1.5px var(--ag-mail); }
 .ag-legende i.fait { opacity: .4; }
 .ag-legende-etats { margin-top: -4px; }
+
+/* Aperçu du mail mis en page, sous le texte. */
+.apercu-mail { margin: 14px 0 0; }
+.apercu-mail figcaption { display: block; margin-bottom: 6px; }
