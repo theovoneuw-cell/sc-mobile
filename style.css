@@ -741,3 +741,39 @@ a.entree { color: inherit; text-decoration: none; }
 .carte-maintenant.liste-carte { cursor: default; padding-top: 14px; }
 .carte-maintenant .maintenant-tete { display: flex; align-items: center; gap: 10px; padding: 0 16px; font-size: 14px; }
 .carte-maintenant .maintenant-titre { font-size: 20px; line-height: 1.2; padding: 8px 16px 4px; }
+
+/* ─── Studios › Carte ───────────────────────────
+   Le module et son CSS (carte/carte.css, tiré de l'appli de bureau) arrivent à la demande ;
+   ici, la mise en page téléphone : carte jusqu'aux onglets, réglages pour le doigt. */
+.st-mode { margin-top: 12px; }
+.st-mode button { text-align: center; }
+.page.mode-carte { display: flex; flex-direction: column; overflow: hidden; padding-bottom: var(--h-onglets); }
+.page.mode-carte > * { flex: none; }
+.page.mode-carte > .carte-tel { flex: 1 1 auto; }
+.page.mode-carte .tete { padding-bottom: 12px; }
+.carte-tel { position: relative; min-height: 0; }
+/* !important : Leaflet pose « position: relative » en ligne sur la carte à sa création. */
+.carte-tel > .carte-studios, .carte-tel > .carte-attente { position: absolute !important; inset: 0; }
+.carte-tel .carte-studios { height: auto; min-height: 0; border-radius: 0; outline: 0; box-shadow: none; -webkit-tap-highlight-color: transparent; }
+/* Bande du bord gauche : le glissement « retour » de l'appli, pas un déplacement de la carte. */
+.carte-tel::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 24px; z-index: 1001; }
+.carte-attente { display: grid; place-content: center; justify-items: center; gap: 12px; padding: 24px; text-align: center; background: var(--surface-2); color: var(--texte-2); font-size: 14px; }
+/* Préparée hors écran à la taille du téléphone (et non 1100 × 680 comme sur le Mac). */
+html .reserve-carte { width: 100vw; height: 100vh; }
+
+.carte-tel .carte-studios .leaflet-top.leaflet-left .ss-compteur { margin: 10px 0 0 10px; padding: 7px 12px 7px 9px; gap: 8px; border-radius: 14px; font-size: 12px; }
+.carte-tel .ss-compteur b { font-size: 17px; }
+.carte-tel .ss-compteur small { font-size: 11px; white-space: nowrap; }
+.carte-tel .ss-goutte.petite { width: 18px; height: 24px; }
+
+.carte-tel .carte-studios .leaflet-bottom.leaflet-left .ss-legende { display: block; margin: 0 0 10px 10px; padding: 0; max-width: calc(100vw - 20px); border-radius: 14px; }
+.ss-legende-bouton { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 13px; font: 700 12px 'Plus Jakarta Sans', system-ui, sans-serif; color: inherit; }
+.ss-legende-bouton::after { content: ''; width: 6px; height: 6px; margin-top: 3px; border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor; transform: rotate(-135deg); transition: transform 160ms var(--ease-out); }
+.ss-legende.ouvert .ss-legende-bouton::after { margin-top: -3px; transform: rotate(45deg); }
+.carte-tel .ss-legende > .ss-legende-corps { display: none; flex-wrap: wrap; gap: 5px 12px; padding: 0 13px 10px; font-size: 11.5px; white-space: normal; }
+.carte-tel .ss-legende.ouvert > .ss-legende-corps { display: flex; }
+.ss-legende-corps > span { display: inline-flex; align-items: center; white-space: nowrap; }
+.carte-tel .carte-studios .leaflet-control-attribution { margin: 0 8px 12px 0; font-size: 9px; }
+.carte-tel:has(.ss-legende.ouvert) .carte-studios .leaflet-control-attribution { visibility: hidden; }
+.carte-tel .bulle-actions button { min-height: 40px; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { .ss-legende-bouton::after { transition: none; } }
