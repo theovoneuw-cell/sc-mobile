@@ -687,3 +687,15 @@ label.btn { cursor: pointer; }
 /* Aperçu du mail mis en page, sous le texte. */
 .apercu-mail { margin: 14px 0 0; }
 .apercu-mail figcaption { display: block; margin-bottom: 6px; }
+
+/* ─── Studios ─────────────────────────────── */
+.filtres-studios { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px; }
+.filtres-studios::-webkit-scrollbar { display: none; }
+.filtres-studios button { flex: none; padding: 8px 13px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--texte-2); background: var(--surface); box-shadow: var(--ombre); }
+.filtres-studios button[aria-pressed="true"] { background: var(--p600, #7c3aed); color: #fff; }
+.etapes-studio { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
+.etapes-studio button { min-height: 36px; padding: 7px 12px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--texte-2); background: var(--neutre-bg); }
+.etapes-studio button[aria-pressed="true"] { background: var(--p600, #7c3aed); color: #fff; }
+.entree .chip { flex: none; margin-left: 8px; }
+a.entree { color: inherit; text-decoration: none; }
+.histoire-studio { margin: 0; padding: 0; list-style: none; color: var(--texte-2); font-size: 14px; display: grid; gap: 4px; }
