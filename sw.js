@@ -1,5 +1,5 @@
 // Soonstep Comm, téléphone : l'appli s'ouvre sans réseau ; les visuels déjà vus restent sur le téléphone.
-const VERSION = '1.15.0-9047018c';
+const VERSION = '1.16.0-31311a22';
 const COQUILLE = `coquille-${VERSION}`;
 const VISUELS = 'visuels-v1';
 const FICHIERS = [
@@ -23,11 +23,12 @@ self.addEventListener('fetch', (e) => {
   const chemin = url.pathname;
 
   // Le contenu (posts, réglages de base) : le réseau d'abord, la dernière copie sinon.
-  if (chemin.endsWith('/d/contenu.bin')) {
+  const nomContenu = ['contenu.bin', 'contenu.gz.bin'].find((n) => chemin.endsWith(`/d/${n}`));
+  if (nomContenu) {
     e.respondWith(fetch(new Request(e.request, { cache: 'no-store' })).then((r) => {
-      if (r.ok) { const copie = r.clone(); caches.open(VISUELS).then((c) => c.put('d/contenu.bin', copie)); }
+      if (r.ok) { const copie = r.clone(); caches.open(VISUELS).then((c) => c.put(`d/${nomContenu}`, copie)); }
       return r;
-    }).catch(() => caches.open(VISUELS).then((c) => c.match('d/contenu.bin')).then((r) => r || Response.error())));
+    }).catch(() => caches.open(VISUELS).then((c) => c.match(`d/${nomContenu}`)).then((r) => r || Response.error())));
     return;
   }
 

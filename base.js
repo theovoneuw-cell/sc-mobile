@@ -64,9 +64,15 @@
   /** Ouvre le contenu avec la clé et le mot de passe. Rejette « cle » s'ils ne l'ouvrent pas. */
   async function ouvrir(cle, secret) {
     K = await cleAes(cle, secret);
-    const brut = await telecharger(`d/contenu.bin?t=${Date.now()}`, 3, { cache: 'no-store' });
+    // Version compressée d'abord (six fois plus légère) ; l'ancienne si le navigateur ne sait pas décompresser.
+    const gz = typeof DecompressionStream !== 'undefined';
+    let brut = null;
+    if (gz) { try { brut = await telecharger(`d/contenu.gz.bin?t=${Date.now()}`, 3, { cache: 'no-store' }); } catch { brut = null; } }
+    const compresse = !!brut;
+    if (!brut) brut = await telecharger(`d/contenu.bin?t=${Date.now()}`, 3, { cache: 'no-store' });
     let clair;
     try { clair = await dechiffrer(K, brut); } catch { throw new Error('cle'); }
+    if (compresse) clair = await new Response(new Blob([clair]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
     paquet = JSON.parse(new TextDecoder().decode(clair));
     return paquet;
   }
